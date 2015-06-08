@@ -15,40 +15,6 @@
             "role": "Developer"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url":  "https://github.com/cristianobaptista/bebop-cms"
-        },
-        {
-            "type": "vcs",
-            "url":  "https://github.com/cristianobaptista/bebop-common"
-        },
-        {
-            "type": "vcs",
-            "url":  "https://github.com/cristianobaptista/bebop-db"
-        },
-        {
-            "type": "vcs",
-            "url":  "https://github.com/cristianobaptista/bebop-http-api"
-        },
-        {
-            "type": "vcs",
-            "url":  "https://github.com/cristianobaptista/bebop-http-client"
-        },
-        {
-            "type": "vcs",
-            "url":  "https://github.com/cristianobaptista/bebop-mvc"
-        },
-        {
-            "type": "vcs",
-            "url":  "https://github.com/cristianobaptista/bebop-scripts-loader"
-        },
-        {
-            "type": "vcs",
-            "url":  "https://github.com/cristianobaptista/bebop-ui"
-        }
-    ],
     "require": {
         "ponticlaro/bebop-cms": "dev-master",
         "ponticlaro/bebop-common": "dev-master",
