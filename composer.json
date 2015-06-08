@@ -1,0 +1,70 @@
+{
+    "name": "ponticlaro/bebop",
+    "description": "Develop WordPress sites faster and more elegantly",
+    "keywords": ["wordpress", "tool", "api", "ui"],
+    "type": "library",
+    "license": [
+       "MIT",
+       "GPL-3.0+"
+    ],
+    "authors": [
+        {
+            "name": "Ponticlaro",
+            "email": "hello@ponticlaro.com",
+            "homepage": "http://www.ponticlaro.com",
+            "role": "Developer"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "https://github.com/cristianobaptista/bebop-cms"
+        },
+        {
+            "type": "vcs",
+            "url":  "https://github.com/cristianobaptista/bebop-common"
+        },
+        {
+            "type": "vcs",
+            "url":  "https://github.com/cristianobaptista/bebop-db"
+        },
+        {
+            "type": "vcs",
+            "url":  "https://github.com/cristianobaptista/bebop-http-api"
+        },
+        {
+            "type": "vcs",
+            "url":  "https://github.com/cristianobaptista/bebop-http-client"
+        },
+        {
+            "type": "vcs",
+            "url":  "https://github.com/cristianobaptista/bebop-mvc"
+        },
+        {
+            "type": "vcs",
+            "url":  "https://github.com/cristianobaptista/bebop-scripts-loader"
+        },
+        {
+            "type": "vcs",
+            "url":  "https://github.com/cristianobaptista/bebop-ui"
+        }
+    ],
+    "require": {
+        "ponticlaro/bebop-cms": "dev-master",
+        "ponticlaro/bebop-common": "dev-master",
+        "ponticlaro/bebop-db": "dev-master",
+        "ponticlaro/bebop-http-api": "dev-master",
+        "ponticlaro/bebop-http-client": "dev-master",
+        "ponticlaro/bebop-mvc": "dev-master",
+        "ponticlaro/bebop-scripts-loader": "dev-master",
+        "ponticlaro/bebop-ui": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "Ponticlaro": "src/"
+        }
+    },
+    "support": {
+        "email": "hello@ponticlaro.com"
+    }
+}
