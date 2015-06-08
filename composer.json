@@ -1,5 +1,5 @@
 {
-    "name": "ponticlaro/bebop",
+    "name": "ponticlaro/bebop-core",
     "description": "Develop WordPress sites faster and more elegantly",
     "keywords": ["wordpress", "tool", "api", "ui"],
     "type": "library",
