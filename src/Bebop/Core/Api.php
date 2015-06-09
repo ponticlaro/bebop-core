@@ -5,10 +5,10 @@ namespace Ponticlaro\Bebop\Core;
 use Ponticlaro\Bebop\Common\ContextManager;
 use Ponticlaro\Bebop\Common\Utils;
 use Ponticlaro\Bebop\Core\Exceptions\ApiException;
-use Ponticlaro\Bebop\Db\Db;
+use Ponticlaro\Bebop\Db;
 use Ponticlaro\Bebop\Db\ObjectMeta;
 use Ponticlaro\Bebop\Db\SqlProjection;
-use Ponticlaro\Bebop\HttpApi\HttpApi;
+use Ponticlaro\Bebop\HttpApi;
 use Ponticlaro\Bebop\Mvc\ModelFactory;
 
 class Api extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract {

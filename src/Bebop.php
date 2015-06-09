@@ -1,6 +1,6 @@
 <?php
 
-namespace Ponticlaro\Bebop\Core;
+namespace Ponticlaro;
 
 use Ponticlaro\Bebop\Cms\PostType;
 use Ponticlaro\Bebop\Common\Collection;
@@ -13,13 +13,13 @@ use Ponticlaro\Bebop\Common\UrlManager;
 use Ponticlaro\Bebop\Common\Utils;
 use Ponticlaro\Bebop\Core\Api;
 use Ponticlaro\Bebop\Core\Helpers\BebopFactory;
-use Ponticlaro\Bebop\Db\Db;
+use Ponticlaro\Bebop\Db;
 use Ponticlaro\Bebop\Db\ObjectMeta;
 use Ponticlaro\Bebop\Mvc\Models\Media;
 use Ponticlaro\Bebop\Mvc\View;
 use Ponticlaro\Bebop\ScriptsLoader\Css;
 use Ponticlaro\Bebop\ScriptsLoader\Js;
-use Ponticlaro\Bebop\UI\UI;
+use Ponticlaro\Bebop\UI;
 
 class Bebop extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract
 {
