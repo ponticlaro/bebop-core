@@ -61,25 +61,9 @@ class Bebop extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract
         // Instantiate Paths Manager & set Bebop root directory
         PathManager::getInstance()->set('bebop', __DIR__);
 
-        // Set default Media Mvc Model modifications
-        Media::onInit(function($media) {
-
-            $media->sizes = array();
-            
-            foreach (get_intermediate_image_sizes() as $size) {
-                
-                $image_data = wp_get_attachment_image_src($media->ID, $size);
-
-                if ($image_data) {
-
-                    $media->sizes[$size] = (object) array(
-                        'url'     => $image_data[0],
-                        'width'   => $image_data[1],
-                        'height'  => $image_data[2],
-                        'resized' => $image_data[3],
-                    );
-                }
-            }
+        // Set default Media Mvc Model modifications on the Bebop HTTP API
+        Media::onContext('api', function($media) {
+            $media->cacheAllImageSizes();
         });
 
         // Set default views directory
