@@ -2,6 +2,7 @@
 
 namespace Ponticlaro;
 
+use Ponticlaro\Bebop\Cms\Config;
 use Ponticlaro\Bebop\Cms\PostType;
 use Ponticlaro\Bebop\Common\Collection;
 use Ponticlaro\Bebop\Common\ContextManager;
@@ -81,6 +82,9 @@ class Bebop extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract
         // Instantiate Api
         self::Api();
 
+        // Instantiate Config
+        Config::getInstance();
+
         // Shortcode support for in editor use 
         add_shortcode('Bebop', array($this, '__bebopShortcodes'));
     }
@@ -137,6 +141,15 @@ class Bebop extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract
         $feature_manager = FeatureManager::getInstance();
 
         return $id && is_string($id) ? $feature_manager->get($id) : $feature_manager;
+    }
+
+    /**
+     * Returns the config manager
+     * 
+     */
+    public static function Config()
+    {
+        return Config::getInstance();
     }
 
     /**
