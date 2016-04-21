@@ -66,6 +66,67 @@ class Api extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract {
         // Get all registered post types 
         $post_types = get_post_types(array(), 'objects');
 
+        //////////////////////////
+        // Add /search endpoint //
+        //////////////////////////
+        $this->api->get("search(/)(:keywords)", function($keywords = null) use($post_types) {
+
+            // Override context
+            ContextManager::getInstance()->overrideCurrent('api/search');
+
+            // Default query args
+            $default_query = [
+                'type' => []
+            ];
+
+            // Add all publicly queryable types to search results
+            if ($post_types) {
+                foreach ($post_types as $type) {
+                
+                    if ($type->name == 'page' || $type->publicly_queryable)
+                        $default_query['type'][] = $type->name;
+                }
+            }
+
+            // Enable developers to modify $default_query for this resource
+            $default_query = apply_filters("bebop:api:search:default_query", $default_query);
+
+            // Capture 'post_type' argument
+            if (isset($_GET['post_type'])) {
+
+                $_GET['type'] = $_GET['post_type'];
+                unset($_GET['post_type']);
+            }
+
+            // Merge default query args with user query args
+            $query = array_merge($default_query, $_GET);
+
+            // Add keywords to query
+            if ($keywords)
+                $query['s'] = $keywords;
+
+            // Enable developers to modify final query for this resource
+            $query = apply_filters("bebop:api:search:query", $query);
+
+            // Get results
+            $response = Db::wpQuery($query)->setOption('with_meta', true)->execute();
+
+            // Apply model modifications for each post type
+            if ($response['items']) {
+                foreach ($response['items'] as $index => $post) {
+                    
+                    if (ModelFactory::canManufacture($post->post_type))
+                        $response['items'][$index] = ModelFactory::create($post->post_type, array($post));
+                }
+            }
+
+            // Enable developers to modify response for this resource
+            $response = apply_filters("bebop:api:search:response", $response);
+
+            // Return response
+            return $response;
+        });
+
         /////////////////////////////////////////////////
         // Add endpoints for all available posts types //
         /////////////////////////////////////////////////
