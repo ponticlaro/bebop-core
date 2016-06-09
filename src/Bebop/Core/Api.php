@@ -47,7 +47,7 @@ class Api extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract {
         $this->postmeta_projection = $postmeta_projection;
 
         // Set default routes ONLY after registering custom post types 
-        add_action('init', array($this, 'setDefaultRoutes'), 99999);
+        add_action('init', array($this, 'setDefaultRoutes'), 2);
     }
 
    /**
@@ -69,10 +69,13 @@ class Api extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract {
         //////////////////////////
         // Add /search endpoint //
         //////////////////////////
-        $this->api->get("search(/)(:keywords)", function($keywords = null) use($post_types) {
+        $this->api->get("search(/)(:keywords)", function($keywords = null) {
 
             // Override context
             ContextManager::getInstance()->overrideCurrent('api/search');
+
+            // Get all registered post types 
+            $post_types = get_post_types(array(), 'objects');
 
             // Default query args
             $default_query = [
