@@ -47,7 +47,7 @@ class Api extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract {
         $this->postmeta_projection = $postmeta_projection;
 
         // Set default routes ONLY after registering custom post types 
-        add_action('init', array($this, 'setDefaultRoutes'), 2);
+        add_action('init', array($this, 'setDefaultRoutes'), 99999);
     }
 
    /**
