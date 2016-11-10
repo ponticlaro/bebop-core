@@ -9,7 +9,7 @@ use Ponticlaro\Bebop\Db;
 use Ponticlaro\Bebop\Db\ObjectMeta;
 use Ponticlaro\Bebop\Db\SqlProjection;
 use Ponticlaro\Bebop\HttpApi;
-use Ponticlaro\Bebop\Mvc\ModelFactory;
+use Ponticlaro\Bebop\Mvc\Helpers\ModelFactory;
 
 class Api extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract {
 
