@@ -21,19 +21,25 @@
     }
   ],
   "require": {
-    "ponticlaro/bebop-cms": "dev-master",
-    "ponticlaro/bebop-common": "dev-master",
-    "ponticlaro/bebop-db": "dev-master",
-    "ponticlaro/bebop-http-api": "dev-master",
-    "ponticlaro/bebop-http-client": "dev-master",
-    "ponticlaro/bebop-mvc": "dev-master",
-    "ponticlaro/bebop-scripts-loader": "dev-master",
-    "ponticlaro/bebop-ui": "dev-master"
+    "ponticlaro/bebop-cms": "^1",
+    "ponticlaro/bebop-common": "^1",
+    "ponticlaro/bebop-db": "^1",
+    "ponticlaro/bebop-http-api": "^1",
+    "ponticlaro/bebop-http-client": "^1",
+    "ponticlaro/bebop-mvc": "^1",
+    "ponticlaro/bebop-scripts-loader": "^1",
+    "ponticlaro/bebop-ui": "^1"
+  },
+  "require-dev": {
+    "apigen/apigen": "^4"
   },
   "autoload": {
     "psr-4": {
       "Ponticlaro\\": "src/"
     }
+  },
+  "scripts": {
+    "generate-docs": "apigen generate --config ./apigen.yaml"
   },
   "support": {
     "email": "hello@ponticlaro.com"
