@@ -22,11 +22,11 @@
   ],
   "require": {
     "ponticlaro/bebop-cms": "^1",
-    "ponticlaro/bebop-common": "^1",
+    "ponticlaro/bebop-common": "^1.1.1",
     "ponticlaro/bebop-db": "^1",
     "ponticlaro/bebop-http-api": "^1",
     "ponticlaro/bebop-http-client": "^1",
-    "ponticlaro/bebop-mvc": "^1",
+    "ponticlaro/bebop-mvc": "^1.1.1",
     "ponticlaro/bebop-scripts-loader": "^1",
     "ponticlaro/bebop-ui": "^1"
   },

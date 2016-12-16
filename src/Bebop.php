@@ -16,6 +16,7 @@ use Ponticlaro\Bebop\Core\Api;
 use Ponticlaro\Bebop\Core\Helpers\BebopFactory;
 use Ponticlaro\Bebop\Db;
 use Ponticlaro\Bebop\Db\ObjectMeta;
+use Ponticlaro\Bebop\Mvc\Model;
 use Ponticlaro\Bebop\Mvc\Models\Media;
 use Ponticlaro\Bebop\Mvc\View;
 use Ponticlaro\Bebop\ScriptsLoader\Css;
@@ -188,6 +189,20 @@ class Bebop extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract
 
         return $db;
     }
+
+    /**
+     * Creates new data models or return the configuration data model
+     * 
+     * @param mixed $input WP_Post object or post-type string
+     */
+    public static function Model($input)
+    {
+        // Create new data model
+        if (is_string($input) || (is_object($input) && $input instanceof \WP_Post))
+            return new Model($input);
+
+        return null;
+    } 
 
     /**
      * Returns an Mvc\View object with an already defined template

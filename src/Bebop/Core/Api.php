@@ -3,6 +3,7 @@
 namespace Ponticlaro\Bebop\Core;
 
 use Ponticlaro\Bebop\Common\ContextManager;
+use Ponticlaro\Bebop\Common\FeatureManager;
 use Ponticlaro\Bebop\Common\Utils;
 use Ponticlaro\Bebop\Core\Exceptions\ApiException;
 use Ponticlaro\Bebop\Db;
@@ -10,6 +11,7 @@ use Ponticlaro\Bebop\Db\ObjectMeta;
 use Ponticlaro\Bebop\Db\SqlProjection;
 use Ponticlaro\Bebop\HttpApi;
 use Ponticlaro\Bebop\Mvc\Helpers\ModelFactory;
+use Ponticlaro\Bebop\Mvc\Model;
 
 class Api extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract {
 
@@ -118,8 +120,20 @@ class Api extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract {
             if ($response['items']) {
                 foreach ($response['items'] as $index => $post) {
                     
-                    if (ModelFactory::canManufacture($post->post_type))
-                        $response['items'][$index] = ModelFactory::create($post->post_type, array($post));
+                    $type       = $post->post_type;
+                    $class_name = ModelFactory::canManufacture($type) ? ModelFactory::get($type) : null;
+
+                    // Create instance from old style data model
+                    if ($class_name && $class_name::hasMods()) {
+                        
+                        $response['items'][$index] = ModelFactory::create($type, [$post]);
+                    }
+
+                    // Fallback to unique data model
+                    else {
+
+                        $response['items'][$index] = new Model($post);
+                    }
                 }
             }
 
@@ -151,12 +165,20 @@ class Api extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract {
 
                         if ($post instanceof \WP_Post) {
 
-                            if (ModelFactory::canManufacture($post->post_type)) {
+                            $type       = $post->post_type;
+                            $class_name = ModelFactory::canManufacture($type) ? ModelFactory::get($type) : null;
+
+                            // Create instance from old style data model
+                            if ($class_name && $class_name::hasMods()) {
                                 
-                                $post = ModelFactory::create($post->post_type, array($post));
+                                $response = ModelFactory::create($type, [$post]);
                             }
 
-                            $response = $post;
+                            // Fallback to unique data model
+                            else {
+
+                                $response = new Model($post);
+                            }
                         }
 
                     } else {
@@ -183,12 +205,21 @@ class Api extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract {
                         $response = Db::wpQuery($_GET)->setOption('with_meta', true)->execute();
 
                         if ($response['items']) {
-
                             foreach ($response['items'] as $index => $post) {
-                                
-                                if (ModelFactory::canManufacture($post->post_type)) {
 
-                                    $response['items'][$index] = ModelFactory::create($post->post_type, array($post));
+                                $type       = $post->post_type;
+                                $class_name = ModelFactory::canManufacture($type) ? ModelFactory::get($type) : null;
+
+                                // Create instance from old style data model
+                                if ($class_name && $class_name::hasMods()) {
+                                    
+                                    $response['items'][$index] = ModelFactory::create($type, [$post]);
+                                }
+
+                                // Fallback to unique data model
+                                else {
+
+                                    $response['items'][$index] = new Model($post);
                                 }
                             }
                         }
