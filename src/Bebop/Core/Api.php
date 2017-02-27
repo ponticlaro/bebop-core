@@ -13,7 +13,14 @@ use Ponticlaro\Bebop\HttpApi;
 use Ponticlaro\Bebop\Mvc\Helpers\ModelFactory;
 use Ponticlaro\Bebop\Mvc\Model;
 
-class Api extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract {
+class Api {
+
+    /**
+     * Class instance
+     * 
+     * @var object
+     */
+    private static $instance;
 
     /**
      * Api Instance
@@ -33,7 +40,7 @@ class Api extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract {
      * Instantiates the Bebop Api
      * 
      */
-    protected function __construct()
+    public function __construct()
     {
         // Instantiate new Api
         $this->api = new HttpApi('bebop:api', '_bebop/api/');
@@ -50,6 +57,26 @@ class Api extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract {
 
         // Set default routes ONLY after registering custom post types 
         add_action('init', array($this, 'setDefaultRoutes'), 2);
+    }
+
+    /**
+     * Do not allow clones
+     * 
+     * @return void
+    */
+    private final function __clone() {}
+
+    /**
+     * Gets single instance of called class
+     * 
+     * @return object
+     */
+    public static function getInstance() 
+    {
+        if (!isset(static::$instance))
+            static::$instance = new static();
+
+        return static::$instance;
     }
 
    /**

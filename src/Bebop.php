@@ -23,8 +23,15 @@ use Ponticlaro\Bebop\ScriptsLoader\Css;
 use Ponticlaro\Bebop\ScriptsLoader\Js;
 use Ponticlaro\Bebop\UI;
 
-class Bebop extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract
+class Bebop
 {
+    /**
+     * Class instance
+     * 
+     * @var object
+     */
+    private static $instance;
+
     /**
      * Name of the constant that sets the development environment
      * 
@@ -49,7 +56,7 @@ class Bebop extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract
      * Checks environment and build defaults 
      * 
      */
-    protected function __construct()
+    public function __construct()
     {   
         // Instantiate Feature Manager
         FeatureManager::getInstance();
@@ -88,6 +95,26 @@ class Bebop extends \Ponticlaro\Bebop\Common\Patterns\SingletonAbstract
 
         // Shortcode support for in editor use 
         add_shortcode('Bebop', array($this, '__bebopShortcodes'));
+    }
+
+    /**
+     * Do not allow clones
+     * 
+     * @return void
+    */
+    private final function __clone() {}
+
+    /**
+     * Gets single instance of called class
+     * 
+     * @return object
+     */
+    public static function getInstance() 
+    {
+        if (!isset(static::$instance))
+            static::$instance = new static();
+
+        return static::$instance;
     }
 
     /**
