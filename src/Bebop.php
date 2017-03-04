@@ -453,6 +453,12 @@ class Bebop
      */
     public static function setUrl($key, $value = null)
     {
+        if (is_array($key)) {
+
+            static::setUrls($key);
+            return;
+        }
+
         self::Urls()->set($key, $value);  
     }
 
@@ -463,7 +469,11 @@ class Bebop
      */
     public static function setUrls(array $urls = array())
     {
-        self::Urls()->set($key);
+        foreach ($urls as $key => $value) {
+            
+            if (is_string($key))
+                self::Urls()->set($key, $value);
+        }
     }
 
     /**
@@ -519,6 +529,12 @@ class Bebop
      */
     public static function setPath($key, $value = null)
     {
+        if (is_array($key)) {
+            
+            static::setPaths($key);
+            return;
+        }
+
         self::Paths()->set($key, $value);
     }
 
@@ -529,7 +545,11 @@ class Bebop
      */
     public static function setPaths(array $paths = array())
     {
-        self::Paths()->set($paths);
+        foreach ($paths as $key => $value) {
+            
+            if (is_string($key))
+                self::Paths()->set($key, $value);
+        }
     }
 
     /**
